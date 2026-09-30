@@ -1,0 +1,23 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" routerLink="/">Marketplace LR</a>
+    <button class="navbar-toggler" type="button"
+            data-bs-toggle="collapse" data-bs-target="#menu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="menu">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/" routerLinkActive="active"
+             [routerLinkActiveOptions]="{ exact: true }">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/alojamientos" routerLinkActive="active">Alojamientos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/mis-reservas" routerLinkActive="active">Mis reservas</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
