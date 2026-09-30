@@ -1,0 +1,86 @@
+<div class="card shadow-sm">
+  <div class="card-body">
+    @if (reservaConfirmada(); as r) {
+      <div class="alert alert-success">
+        <h2 class="h6">¡Reserva confirmada!</h2>
+        <p class="mb-1">Código: <strong>{{ r.id }}</strong></p>
+        <p class="mb-0">{{ r.fechaLlegada }} → {{ r.fechaSalida }} · {{ r.noches }} noche(s)</p>
+      </div>
+      <a routerLink="/mis-reservas" class="btn btn-primary w-100 mb-2">Ver mis reservas</a>
+      <button class="btn btn-outline-secondary w-100" (click)="nuevaCotizacion()">
+        Hacer otra cotización
+      </button>
+    } @else {
+      <h2 class="h5 card-title mb-3">Cotiza tu estancia</h2>
+
+      <div class="mb-3">
+        <label for="llegada" class="form-label">Fecha de llegada</label>
+        <input id="llegada" type="date" class="form-control" [min]="hoy"
+               [ngModel]="fechaLlegada()"
+               (ngModelChange)="fechaLlegada.set($event); invalidar()">
+      </div>
+
+      <div class="mb-3">
+        <label for="salida" class="form-label">Fecha de salida</label>
+        <input id="salida" type="date" class="form-control" [min]="fechaLlegada() || hoy"
+               [ngModel]="fechaSalida()"
+               (ngModelChange)="fechaSalida.set($event); invalidar()">
+      </div>
+
+      <div class="mb-3">
+        <label for="huespedes" class="form-label">Número de huéspedes</label>
+        <input id="huespedes" type="number" min="1" class="form-control"
+               [ngModel]="huespedes()"
+               (ngModelChange)="huespedes.set($event); invalidar()">
+        <div class="form-text">Capacidad máxima: {{ alojamiento().capacidad }}</div>
+      </div>
+
+      <button class="btn btn-primary w-100" (click)="calcular()">Calcular cotización</button>
+
+      @if (errores().length > 0) {
+        <div class="alert alert-danger mt-3 mb-0" role="alert">
+          <ul class="mb-0 ps-3">
+            @for (e of errores(); track e) {
+              <li>{{ e }}</li>
+            }
+          </ul>
+        </div>
+      }
+
+      @if (cotizacion(); as c) {
+        <hr>
+        <h3 class="h6">Resumen de la cotización</h3>
+        <table class="table table-sm mb-3">
+          <tbody>
+          <tr>
+            <td>{{ c.precioNoche | currency:'COP':'symbol-narrow':'1.0-0' }} × {{ c.noches }} noche(s)</td>
+            <td class="text-end">{{ c.subtotal | currency:'COP':'symbol-narrow':'1.0-0' }}</td>
+          </tr>
+          <tr>
+            <td>Tarifa de limpieza</td>
+            <td class="text-end">{{ c.tarifaLimpieza | currency:'COP':'symbol-narrow':'1.0-0' }}</td>
+          </tr>
+          <tr>
+            <td>Tarifa de servicio (10 %)</td>
+            <td class="text-end">{{ c.tarifaServicio | currency:'COP':'symbol-narrow':'1.0-0' }}</td>
+          </tr>
+          <tr class="fw-bold table-light">
+            <td>Total</td>
+            <td class="text-end">{{ c.total | currency:'COP':'symbol-narrow':'1.0-0' }}</td>
+          </tr>
+          </tbody>
+        </table>
+
+        @if (!mostrarReserva()) {
+          <button class="btn btn-success w-100" (click)="mostrarReserva.set(true)">Reservar</button>
+        } @else {
+          <app-formulario-reserva
+            [alojamiento]="alojamiento()"
+            [cotizacion]="c"
+            (reservaCreada)="alConfirmarReserva($event)"
+            (cancelar)="mostrarReserva.set(false)" />
+        }
+      }
+    }
+  </div>
+</div>

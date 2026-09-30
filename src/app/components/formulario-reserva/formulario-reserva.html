@@ -1,0 +1,25 @@
+<form #f="ngForm" (ngSubmit)="confirmar(f)" novalidate class="border-top pt-3">
+  <h3 class="h6">Datos del huésped</h3>
+
+  <div class="mb-3">
+    <label for="nombre" class="form-label">Nombre completo</label>
+    <input id="nombre" name="nombre" class="form-control" required minlength="3"
+           [(ngModel)]="nombre" #n="ngModel"
+           [class.is-invalid]="n.invalid && (n.touched || f.submitted)">
+    <div class="invalid-feedback">Ingresa tu nombre (mínimo 3 caracteres).</div>
+  </div>
+
+  <div class="mb-3">
+    <label for="correo" class="form-label">Correo electrónico</label>
+    <input id="correo" name="correo" type="email" class="form-control" required
+           pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
+           [(ngModel)]="correo" #c="ngModel"
+           [class.is-invalid]="c.invalid && (c.touched || f.submitted)">
+    <div class="invalid-feedback">Ingresa un correo válido, por ejemplo nombre@correo.com.</div>
+  </div>
+
+  <div class="d-flex gap-2">
+    <button type="submit" class="btn btn-success flex-fill">Confirmar reserva</button>
+    <button type="button" class="btn btn-outline-secondary" (click)="cancelar.emit()">Cancelar</button>
+  </div>
+</form>

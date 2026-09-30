@@ -1,1 +1,53 @@
-<p>listado works!</p>
+<h2 class="mb-3">Alojamientos disponibles</h2>
+
+<div class="card card-body mb-4">
+  <div class="row g-3 align-items-end">
+    <div class="col-md-3">
+      <label class="form-label">Ciudad</label>
+      <select class="form-select" [ngModel]="ciudad()" (ngModelChange)="ciudad.set($event)">
+        <option value="">Todas</option>
+        @for (c of ciudades(); track c) {
+          <option [value]="c">{{ c }}</option>
+        }
+      </select>
+    </div>
+    <div class="col-md-3">
+      <label class="form-label">Tipo</label>
+      <select class="form-select" [ngModel]="tipo()" (ngModelChange)="tipo.set($event)">
+        <option value="">Todos</option>
+        @for (t of tipos(); track t) {
+          <option [value]="t">{{ t }}</option>
+        }
+      </select>
+    </div>
+    <div class="col-md-2">
+      <label class="form-label">Huéspedes</label>
+      <input type="number" min="1" class="form-control"
+             [ngModel]="huespedes()" (ngModelChange)="huespedes.set($event)">
+    </div>
+    <div class="col-md-2">
+      <label class="form-label">Precio máximo</label>
+      <input type="number" min="0" class="form-control"
+             [ngModel]="precioMax()" (ngModelChange)="precioMax.set($event)">
+    </div>
+    <div class="col-md-2">
+      <button class="btn btn-outline-secondary w-100" (click)="limpiarFiltros()">
+        Limpiar filtros
+      </button>
+    </div>
+  </div>
+</div>
+
+@if (filtrados().length === 0) {
+  <div class="alert alert-info">
+    No se encontraron alojamientos con los filtros seleccionados.
+  </div>
+} @else {
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    @for (a of filtrados(); track a.id) {
+      <div class="col">
+        <app-alojamiento-card [alojamiento]="a" />
+      </div>
+    }
+  </div>
+}
