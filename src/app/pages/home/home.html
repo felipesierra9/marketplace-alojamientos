@@ -1,1 +1,17 @@
-<p>home works!</p>
+<section class="bg-light rounded p-5 mb-5 text-center">
+  <h1 class="display-5 fw-bold">Marketplace LR</h1>
+  <p class="lead text-muted">
+    Encuentra el alojamiento ideal para tu próxima estancia: apartamentos, casas y
+    cabañas en los mejores destinos de Colombia.
+  </p>
+  <a routerLink="/alojamientos" class="btn btn-primary btn-lg">Buscar alojamientos</a>
+</section>
+
+<h2 class="mb-3">Alojamientos destacados</h2>
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+  @for (a of destacados(); track a.id) {
+    <div class="col">
+      <app-alojamiento-card [alojamiento]="a" />
+    </div>
+  }
+</div>

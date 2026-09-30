@@ -1,1 +1,39 @@
-<p>mis-reservas works!</p>
+<h2 class="mb-3">Mis reservas</h2>
+
+@if (reservas.length === 0) {
+  <div class="alert alert-info">
+    Aún no tienes reservas.
+    <a routerLink="/alojamientos" class="alert-link">Explora los alojamientos disponibles</a>
+  </div>
+} @else {
+  <div class="table-responsive">
+    <table class="table table-hover align-middle">
+      <thead class="table-dark">
+      <tr>
+        <th>Código</th>
+        <th>Alojamiento</th>
+        <th>Ciudad</th>
+        <th>Llegada</th>
+        <th>Salida</th>
+        <th class="text-center">Huéspedes</th>
+        <th class="text-end">Total</th>
+        <th>Estado</th>
+      </tr>
+      </thead>
+      <tbody>
+        @for (r of reservas; track r.id) {
+          <tr>
+            <td><small class="text-muted">{{ r.id }}</small></td>
+            <td>{{ r.nombreAlojamiento }}</td>
+            <td>{{ r.ciudad }}</td>
+            <td>{{ r.fechaLlegada }}</td>
+            <td>{{ r.fechaSalida }}</td>
+            <td class="text-center">{{ r.huespedes }}</td>
+            <td class="text-end">{{ r.total | currency:'COP':'symbol-narrow':'1.0-0' }}</td>
+            <td><span class="badge text-bg-success">{{ r.estado }}</span></td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+}
