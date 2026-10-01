@@ -1,0 +1,17 @@
+.barra {
+  background: linear-gradient(135deg, #1e1b4b, #4f46e5);
+  box-shadow: 0 6px 24px rgba(30, 27, 75, 0.35);
+  padding: 0.8rem 0;
+}
+
+.marca { font-weight: 700; font-size: 1.3rem; letter-spacing: 0.3px; }
+.marca span { color: #fdba74; }
+
+.enlace {
+  border-radius: 50rem;
+  padding: 0.45rem 1.1rem !important;
+  font-weight: 500;
+  transition: all 0.25s ease;
+}
+.enlace:hover { background: rgba(255, 255, 255, 0.15); }
+.enlace.active { background: #fff; color: #4f46e5 !important; font-weight: 600; }

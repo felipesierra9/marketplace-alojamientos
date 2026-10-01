@@ -1,13 +1,52 @@
-<section class="bg-light rounded p-5 mb-5 text-center">
-  <h1 class="display-5 fw-bold">Marketplace LR</h1>
-  <p class="lead text-muted">
-    Encuentra el alojamiento ideal para tu próxima estancia: apartamentos, casas y
-    cabañas en los mejores destinos de Colombia.
-  </p>
-  <a routerLink="/alojamientos" class="btn btn-primary btn-lg">Buscar alojamientos</a>
+<section class="hero"
+         style="background-image: linear-gradient(120deg, rgba(30,27,75,.88), rgba(79,70,229,.65)), url('assets/images/cartagena.jpg')">
+  <div class="hero-contenido">
+    <span class="hero-etiqueta">✨ Estancias únicas en Colombia</span>
+    <h1>Encuentra el lugar perfecto para tu próxima escapada</h1>
+    <p>Apartamentos, casas y cabañas en los destinos más lindos del país. Cotiza y reserva en minutos.</p>
+    <div class="d-flex flex-wrap gap-2 justify-content-center">
+      <a routerLink="/alojamientos" class="btn btn-lg boton-hero">🔎 Buscar alojamientos</a>
+      <a routerLink="/mis-reservas" class="btn btn-lg btn-outline-light">Mis reservas</a>
+    </div>
+    <div class="destinos">
+      <span>Bogotá</span><span>Cartagena</span><span>Medellín</span>
+      <span>Guatapé</span><span>Villa de Leyva</span>
+    </div>
+  </div>
 </section>
 
-<h2 class="mb-3">Alojamientos destacados</h2>
+<section class="row g-3 my-5 text-center">
+  <div class="col-md-4">
+    <div class="beneficio">
+      <div class="icono">💸</div>
+      <h3 class="h6">Precios claros</h3>
+      <p class="text-muted mb-0">Ves el desglose completo antes de reservar.</p>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="beneficio">
+      <div class="icono">⚡</div>
+      <h3 class="h6">Reserva rápida</h3>
+      <p class="text-muted mb-0">Cotiza y confirma en pocos pasos.</p>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="beneficio">
+      <div class="icono">🌎</div>
+      <h3 class="h6">Destinos únicos</h3>
+      <p class="text-muted mb-0">Desde la ciudad hasta la naturaleza.</p>
+    </div>
+  </div>
+</section>
+
+<div class="d-flex justify-content-between align-items-end mb-3">
+  <div>
+    <h2 class="mb-0">⭐ Alojamientos destacados</h2>
+    <p class="text-muted mb-0">Los mejor calificados por nuestros huéspedes</p>
+  </div>
+  <a routerLink="/alojamientos" class="btn btn-outline-secondary d-none d-md-inline-block">Ver todos</a>
+</div>
+
 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
   @for (a of destacados(); track a.id) {
     <div class="col">

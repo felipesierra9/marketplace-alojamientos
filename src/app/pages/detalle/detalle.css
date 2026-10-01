@@ -1,21 +1,24 @@
 .imagen-principal {
-  height: 420px;
+  height: 440px;
   object-fit: cover;
-  background: #e9ecef;
+  background: linear-gradient(135deg, #c7d2fe, #e9d5ff);
+  border-radius: 24px !important;
+  box-shadow: var(--sombra-fuerte);
 }
 
 .miniatura {
-  width: 90px;
-  height: 65px;
+  width: 100px;
+  height: 70px;
   object-fit: cover;
   cursor: pointer;
-  opacity: 0.7;
-  border: 2px solid transparent;
-  background: #e9ecef;
+  opacity: 0.6;
+  border: 3px solid transparent;
+  border-radius: 12px !important;
+  transition: all 0.25s ease;
+  background: #e0e3ff;
 }
+.miniatura:hover { opacity: 1; transform: translateY(-3px); }
+.miniatura.activa { opacity: 1; border-color: var(--primario); }
 
-.miniatura:hover,
-.miniatura.activa {
-  opacity: 1;
-  border-color: #0d6efd;
-}
+.bg-light { background: #fff !important; box-shadow: var(--sombra); transition: transform 0.25s ease; }
+.bg-light:hover { transform: translateY(-4px); }

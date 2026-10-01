@@ -1,0 +1,8 @@
+.table-responsive {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: var(--sombra);
+  overflow: hidden;
+}
+thead th { background: linear-gradient(135deg, #1e1b4b, #4f46e5) !important; color: #fff; border: none; padding: 1rem; }
+tbody td { padding: 1rem; }
