@@ -1,14 +1,14 @@
-<h2 class="mb-3">Mis reservas</h2>
+<h2 class="mb-3">🧾 Mis reservas</h2>
 
-@if (reservas.length === 0) {
+@if (reservas().length === 0) {
   <div class="alert alert-info">
     Aún no tienes reservas.
     <a routerLink="/alojamientos" class="alert-link">Explora los alojamientos disponibles</a>
   </div>
 } @else {
   <div class="table-responsive">
-    <table class="table table-hover align-middle">
-      <thead class="table-dark">
+    <table class="table table-hover align-middle mb-0">
+      <thead>
       <tr>
         <th>Código</th>
         <th>Alojamiento</th>
@@ -18,11 +18,12 @@
         <th class="text-center">Huéspedes</th>
         <th class="text-end">Total</th>
         <th>Estado</th>
+        <th class="text-end">Acciones</th>
       </tr>
       </thead>
       <tbody>
-        @for (r of reservas; track r.id) {
-          <tr>
+        @for (r of reservas(); track r.id) {
+          <tr [class.cancelada]="r.estado === 'CANCELADA'">
             <td><small class="text-muted">{{ r.id }}</small></td>
             <td>{{ r.nombreAlojamiento }}</td>
             <td>{{ r.ciudad }}</td>
@@ -30,7 +31,33 @@
             <td>{{ r.fechaSalida }}</td>
             <td class="text-center">{{ r.huespedes }}</td>
             <td class="text-end">{{ r.total | currency:'COP':'symbol-narrow':'1.0-0' }}</td>
-            <td><span class="badge text-bg-success">{{ r.estado }}</span></td>
+            <td>
+              <span class="badge"
+                    [class.text-bg-success]="r.estado === 'CONFIRMADA'"
+                    [class.text-bg-danger]="r.estado === 'CANCELADA'">
+                {{ r.estado }}
+              </span>
+            </td>
+            <td class="text-end acciones">
+              @if (pendiente()?.id === r.id) {
+                <span class="me-2 small fw-semibold">
+                  {{ pendiente()?.tipo === 'cancelar' ? '¿Cancelar reserva?' : '¿Eliminar de la lista?' }}
+                </span>
+                <button class="btn btn-sm btn-danger me-1" (click)="confirmar()">Sí</button>
+                <button class="btn btn-sm btn-outline-secondary" (click)="descartar()">No</button>
+              } @else {
+                @if (r.estado === 'CONFIRMADA') {
+                  <button class="btn btn-sm btn-outline-warning me-1"
+                          (click)="pedirConfirmacion(r.id, 'cancelar')">
+                    Cancelar
+                  </button>
+                }
+                <button class="btn btn-sm btn-outline-danger" title="Eliminar reserva"
+                        (click)="pedirConfirmacion(r.id, 'eliminar')">
+                  🗑️
+                </button>
+              }
+            </td>
           </tr>
         }
       </tbody>

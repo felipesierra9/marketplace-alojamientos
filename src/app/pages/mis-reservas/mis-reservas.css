@@ -6,3 +6,7 @@
 }
 thead th { background: linear-gradient(135deg, #1e1b4b, #4f46e5) !important; color: #fff; border: none; padding: 1rem; }
 tbody td { padding: 1rem; }
+tr.cancelada td { opacity: 0.6; }
+tr.cancelada td:last-child { opacity: 1; }
+
+.acciones { white-space: nowrap; }

@@ -61,4 +61,16 @@ export class ReservaService {
   getReservas(): Reserva[] {
     return [...this.reservas];
   }
+  cancelar(id: string): void {
+    const reserva = this.reservas.find(r => r.id === id);
+    if (reserva) {
+      reserva.estado = 'CANCELADA';
+      this.guardar();
+    }
+  }
+
+  eliminar(id: string): void {
+    this.reservas = this.reservas.filter(r => r.id !== id);
+    this.guardar();
+  }
 }
