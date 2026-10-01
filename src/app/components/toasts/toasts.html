@@ -1,0 +1,14 @@
+<div class="contenedor-toasts">
+  @for (t of servicio.toasts(); track t.id) {
+    <div class="toast-item" [class]="'toast-item ' + t.tipo" (click)="servicio.cerrar(t.id)">
+      <span>
+        @switch (t.tipo) {
+          @case ('exito') { ✅ }
+          @case ('error') { ⚠️ }
+          @default { ℹ️ }
+        }
+      </span>
+      <span>{{ t.mensaje }}</span>
+    </div>
+  }
+</div>

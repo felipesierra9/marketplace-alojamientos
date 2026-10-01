@@ -6,6 +6,7 @@ import { Alojamiento } from '../../models/alojamiento';
 import { Cotizacion } from '../../models/cotizacion';
 import { Reserva } from '../../models/reserva';
 import { CotizacionService } from '../../services/cotizacion.service';
+import { ToastService } from '../../services/toast.service';
 import { FormularioReserva } from '../formulario-reserva/formulario-reserva';
 
 @Component({
@@ -16,6 +17,7 @@ import { FormularioReserva } from '../formulario-reserva/formulario-reserva';
 })
 export class FormularioCotizacion {
   private cotizacionService = inject(CotizacionService);
+  private toast = inject(ToastService);
 
   alojamiento = input.required<Alojamiento>();
 
@@ -55,11 +57,16 @@ export class FormularioCotizacion {
     );
     this.cotizacion.set(resultado.cotizacion);
     this.errores.set(resultado.errores);
+
+    if (resultado.errores.length > 0) {
+      this.toast.mostrar('Revisa los datos de tu cotización', 'error');
+    }
   }
 
   alConfirmarReserva(reserva: Reserva): void {
     this.reservaConfirmada.set(reserva);
     this.mostrarReserva.set(false);
+    this.toast.mostrar('¡Reserva confirmada con éxito! 🎉', 'exito');
   }
 
   nuevaCotizacion(): void {
