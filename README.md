@@ -1,59 +1,63 @@
-# MarketplaceAlojamientos
+# Marketplace de Alojamientos
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.2.0.
+## Descripción
+Aplicación web desarrollada en Angular para **Inversiones LR**, que permite a los huéspedes explorar alojamientos temporales, filtrarlos, ver su detalle, obtener una cotización y registrar una reserva simulada. Esta primera versión incluye únicamente el frontend; los datos se leen desde un archivo JSON a través de un servicio de Angular.
 
-## Development server
+Proyecto del curso Desarrollo de Sistemas de Información 3, Ingeniería de Sistemas, Universidad El Bosque.
 
-To start a local development server, run:
+## Integrantes
+- Andrés Felipe Sierra Monroy
+- [Nombre completo del compañero]
 
+## Tecnologías utilizadas
+- Angular [versión, la ves en package.json] y TypeScript
+- Bootstrap 5
+- RxJS y Angular Router
+- Git y GitHub
+- WebStorm
+
+## Requisitos para ejecutar la aplicación
+- Node.js (versión LTS)
+- npm
+- Angular CLI: `npm install -g @angular/cli`
+
+## Instalación
+```bash
+git clone https://github.com/felipesierra9/marketplace-alojamientos.git
+cd marketplace-alojamientos
+npm install
+```
+
+## Ejecución
 ```bash
 ng serve
 ```
+Luego abre `http://localhost:4200` en el navegador.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Principales funcionalidades
+- Página de inicio con nombre de la plataforma, descripción y alojamientos destacados.
+- Listado de alojamientos activos con imagen, ciudad, tipo, capacidad, precio, calificación y servicios.
+- Filtros por ciudad, tipo, número de huéspedes y precio máximo, con opción para limpiarlos.
+- Detalle del alojamiento con galería, características, reglas, servicios y reseñas.
+- Cotización con número de noches, subtotal, tarifa de limpieza, tarifa de servicio (10 %) y total.
+- Validación de las reglas de negocio (fechas, capacidad, precio).
+- Reserva simulada con estado inicial CONFIRMADA, guardada en localStorage.
+- Vista "Mis reservas" con mensaje cuando no hay reservas.
+- Diseño responsive.
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+## Estructura general del proyecto
+```
+src/app/
+├── components/   Componentes reutilizables (navbar, tarjeta, formularios)
+├── pages/        Vistas de cada ruta (home, listado, detalle, mis-reservas)
+├── models/       Interfaces TypeScript
+├── services/     Acceso a datos, cotización y reservas
+├── app.routes.ts Navegación
+└── app.config.ts Configuración
+public/assets/
+├── data/         marketplace-data.json
+└── images/       Imágenes de los alojamientos
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Datos
+Los datos iniciales están en `public/assets/data/marketplace-data.json` y se consultan mediante `AlojamientoService`.
